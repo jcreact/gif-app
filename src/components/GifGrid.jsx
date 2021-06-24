@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
+// Componentes
 import { GifGridItem } from './GifGridItem.jsx';
-import { getGifs } from '../helpers/getGifs';
+import { Spinner } from './Spinner.jsx';
+
+// Custom Hooks
+import { useFetchGifs } from '../hooks/useFetchGifs';
 
 export const GifGrid = ({ category }) => {
-    const [images, setImages] = useState([]);
+    const { data: images, loading } = useFetchGifs(category);
 
-    useEffect(() => {
-        getGifs(category).then(setImages);
-    }, [category]);
+    const showImages = () =>
+        images.map((img) => <GifGridItem key={img.id} {...img} />);
 
     return (
         <>
             <h3>{category}</h3>
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-                {images.map((image) => (
-                    <GifGridItem key={image.id} {...image} />
-                ))}
+            {loading && <Spinner />}
+            <div className="row row-cols-sm-2 row-cols-lg-4 g-4">
+                {showImages()}
             </div>
         </>
     );
