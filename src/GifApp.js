@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 
-const GifApp = () => {
+import { AddCategory } from './components/AddCategory.jsx';
 
-    // const categories = ['Dragon Ball', 'One Punch', 'Akame Ga Kill'];
-    const [categories, setCategories] = useState(['Dragon Ball', 'One Punch', 'Akame Ga Kill']);
+export const GifApp = () => {
 
-    const handleAdd = () => {
-        setCategories(cats => [...cats, 'Hi-Man']);
-    };
+    const [categories, setCategories] = useState(['Dragon Ball']);
 
     return (
         <>
-            <h2 className="mt-3">| Gif App</h2>
+            <h2 className="mt-3">Gif App</h2>
+            <AddCategory setCategories={setCategories} />
             <hr />
-            <button className="btn btn-primary" onClick={handleAdd}>Agregar</button>
-            <ol className="mt-2">
+            <ol>
                 {
                     categories.map(cat => {
                         return <li key={cat}>{cat}</li>;
@@ -24,5 +21,3 @@ const GifApp = () => {
         </>
     );
 };
-
-export default GifApp;
