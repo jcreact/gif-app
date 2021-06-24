@@ -16,7 +16,7 @@ export const GifGrid = ({ category }) => {
 
     return (
         <>
-            <h3>{category}</h3>
+            <h3 className="animate__animated animate__fadeIn">{category}</h3>
             {loading && <Spinner />}
             <div className="row row-cols-sm-2 row-cols-lg-4 g-4">
                 {showImages()}
