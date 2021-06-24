@@ -1,19 +1,17 @@
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const AddCategory = ({setCategories}) => {
-
+export const AddCategory = ({ setCategories }) => {
     const [category, setCategory] = useState('');
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         setCategory(e.target.value);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if( category && category.trim() ){
-            setCategories(cats => [...cats, category]);
+        if (category && category.trim()) {
+            setCategories((cats) => [category, ...cats]);
             setCategory('');
         }
     };
@@ -21,10 +19,10 @@ export const AddCategory = ({setCategories}) => {
     return (
         <>
             <form onSubmit={handleSubmit} className="mt-3">
-                <input 
-                    className="form-control" 
-                    type="text" 
-                    value={category} 
+                <input
+                    className="form-control"
+                    type="text"
+                    value={category}
                     onChange={handleChange}
                 />
             </form>
@@ -32,7 +30,6 @@ export const AddCategory = ({setCategories}) => {
     );
 };
 
-
 AddCategory.propTypes = {
-    setCategories: PropTypes.func.isRequired
+    setCategories: PropTypes.func.isRequired,
 };
