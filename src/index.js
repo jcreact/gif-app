@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+import GifApp from './GifApp';
+
 
 ReactDOM.render(
-    <>
-        <h1>Gif App</h1>
-    </>,
+    <GifApp />,
     document.getElementById('root')
 );
