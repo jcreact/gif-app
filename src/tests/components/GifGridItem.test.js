@@ -11,10 +11,37 @@ describe('Pruebas en el componente "GifGridItem.jsx"', () => {
         title: 'Dragon Ball',
         username: 'MKMastersu'
     };
+    const component = shallow(<GifGridItem {...props} />);
 
     test('Debe mostrar <GifGridItem /> correctamente.', () => {
-        const wrapper = shallow(<GifGridItem {...props} />);
-        expect(wrapper).toMatchSnapshot();
+        expect(component).toMatchSnapshot();
+    });
+
+    test('Debe contener el título de la imagen.', () => {
+        const title = component.find('p').text();
+        expect(title).toBe(props.title);
+    });
+
+    test(`Debe contener una imagen y sus atributos 'src' y 'alt'.`, () => {
+        const img = component.find('img');
+
+        // expect(img && true).toBeTruthy();
+        expect(img.exists()).toBeTruthy();
+
+        // const { src, alt } = img.props();
+        expect(img.prop('src')).toBe(props.url);
+        expect(img.prop('alt')).toBe(props.title);
+
+    });
+
+    test(`Debe tener la clase 'col' en el tag <article>.`, () => {
+        expect(component.find('article').hasClass('col')).toBeTruthy();
+    });
+
+    test(`Debe tener las clases 'card' y 'h-100' en el tag <div>.`, () => {
+        const div = component.find('div');
+        expect(div.hasClass('card')).toBeTruthy();
+        expect(div.hasClass('h-100')).toBeTruthy();
     });
 
 });
