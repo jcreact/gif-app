@@ -1,34 +1,57 @@
-# Getting Started with Create React App
+# React Gif App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicación sencilla en React para buscar Gifs, utilizando el API de [GIPHY Developer](https://developers.giphy.com/).
 
-## Available Scripts
-
-In the project directory, you can run:
+## Scripts
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Ejecuta la aplicación en modo de desarrollo. El URL de la aplicación es [http://localhost:3000](http://localhost:3000).
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Se utiliza Enzyme para las pruebas, y los paquetes utilizados son los siguientes:
 
-### `npm run build`
+-   `enzyme`
+-   `@wojtekmaj/enzyme-adapter-react-17`
+-   `enzyme-to-json`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Configuración en `src/setupTests.js`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```javascript
+import Enzyme from 'enzyme';
+import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { createSerializer } from 'enzyme-to-json';
+
+Enzyme.configure({ adapter: new Adapter() });
+expect.addSnapshotSerializer(createSerializer({ mode: 'deep' }));
+```
+
+### `npm run build-pages`
+
+Genera la aplicación en la carpeta `docs` para que sea desplegada en `GitHub Pages`.
+
+**Nota**: Adicionalmente se configura en el `package.json` para los enlaces relativos:
+
+```json
+{
+    ...
+    "homepage": "./"
+    ...
+}
+```
 
 ### Resoluciones de paquetes (npm audit)
 
 `npx npm-force-resolutions`
 
-Y en el `package.json` agregar el atributo `resolutions` con los paquetes.
+Y en el `package.json` agregar el atributo `resolutions` con los paquetes, para este proyecto:
+
+```json
+"resolutions": {
+    "normalize-url": "^4.5.1",
+    "css-what": "^5.0.1",
+    "glob-parent": "^5.1.2",
+    "browserslist": "^4.16.5"
+}
+```
